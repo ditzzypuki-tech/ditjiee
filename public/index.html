@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>DITZ MARKET — Top Up Game Cepat & Aman</title>
+<meta name="description" content="DITZ MARKET: top up Mobile Legends, Free Fire, Valorant, Roblox, Steam Wallet, Google Play dan lainnya. Bayar via QRIS, DANA, GoPay.">
+<meta name="theme-color" content="#050912">
+<meta property="og:title" content="DITZ MARKET — Top Up Game Cepat & Aman">
+<meta property="og:description" content="Top up game favoritmu lewat QRIS, DANA, atau GoPay.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="stylesheet" href="css/store.css">
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><img class="logo" src="assets/logo.svg" alt="">DITZ<span>MARKET</span></div>
+  <div class="nav">
+    <button class="active" onclick="showTab('dashboard',this)">⌂ &nbsp; Dashboard</button>
+    <button onclick="scrollToProducts()">◈ &nbsp; Top Up</button>
+    <button onclick="showTab('prices',this)">≡ &nbsp; Daftar Harga</button>
+    <button onclick="showTab('history',this)">◷ &nbsp; Riwayat</button>
+    <button onclick="showTab('help',this)">? &nbsp; Bantuan</button>
+    <button onclick="showTab('about',this)">⚙ &nbsp; Admin</button>
+  </div>
+</aside>
+<main class="main">
+  <div class="top">
+    <div class="mobile"><b><img class="logo" src="assets/logo.svg" alt="">DITZ<span class="accent">MARKET</span></b></div>
+    <input class="search" id="search" placeholder="Cari game / produk..." oninput="filterProducts()">
+    <div class="user"><span id="userName">Halo, User</span><div class="avatar" id="userAvatar">U</div><button type="button" class="logout-btn" onclick="logoutUser()">Keluar</button></div>
+  </div>
+
+  <section id="dashboard">
+    <div class="hero">
+      <div><h1>Top up cepat. Main tanpa jeda.</h1><p>Isi saldo game favoritmu dalam hitungan menit.</p><button class="btn" onclick="scrollToProducts()">Mulai Top Up →</button></div>
+      <div class="hero-art anime-hero-art"><img src="assets/a103c47d8f.jpg" alt="Ilustrasi karakter anime Ditz Market"></div>
+    </div>
+    <div class="stats">
+      <div class="card stat"><small>Status sistem</small><b class="ok">● Online</b></div>
+    </div>
+    <div class="section-title" id="produk" style="display:none"></div>
+    <div class="products" id="products"></div>
+    <div class="section-title"><h2>Cara Top Up</h2></div>
+    <div class="steps-strip">
+      <div class="step-card"><span class="step-no">1</span><b>Pilih game &amp; paket</b><small>Klik game, lalu pilih nominal yang kamu mau.</small></div>
+      <div class="step-card"><span class="step-no">2</span><b>Isi ID akun</b><small>Pastikan ID (dan Zone ID bila ada) sudah benar.</small></div>
+      <div class="step-card"><span class="step-no">3</span><b>Bayar sesuai total</b><small>QRIS, DANA, atau GoPay dalam 15 menit. Nominal harus tepat sampai digit terakhir.</small></div>
+      <div class="step-card"><span class="step-no">4</span><b>Konfirmasi &amp; tunggu</b><small>Setelah membayar, tekan “Saya Sudah Membayar”. Pembayaran hanya disetujui manual oleh admin, lalu top up diproses.</small></div>
+    </div>
+  </section>
+
+  <section id="prices" style="display:none">
+    <div class="section-title"><h2>Daftar Harga Top Up</h2><small>Pilih paket untuk langsung checkout</small></div>
+    <div id="priceList"></div>
+  </section>
+
+  <section id="history" style="display:none">
+    <div class="section-title"><h2>Riwayat Transaksi</h2></div>
+    <div class="card" id="historyBox"></div>
+  </section>
+
+<section id="about" style="display:none">
+    <div class="section-title"><h2>Tentang Admin</h2></div>
+    <div class="card about-card">
+      <div class="about-top">
+        <div class="about-avatar">A</div>
+        <div>
+          <h3>Adit</h3>
+          <span class="about-role">Admin &amp; Pembuat Website DITZ MARKET</span>
+        </div>
+      </div>
+      <p>Halo, saya <b>Adit</b>, admin sekaligus pembuat website <b>DITZ MARKET</b>. Website ini saya buat supaya top up game favoritmu bisa dilakukan dengan cepat, mudah, dan jelas alurnya.</p>
+      <p>Kalau ada kendala saat top up atau pembayaran, jangan ragu hubungi saya langsung lewat WhatsApp.</p>
+      <div class="about-info">
+        <div><small>Nama</small><b>Adit</b></div>
+        <div><small>Peran</small><b>Admin &amp; Pembuat Web</b></div>
+        <div><small>Website</small><b>DITZ MARKET</b></div>
+        <div><small>WhatsApp</small><b>0878-5577-1529</b></div>
+      </div>
+      <div class="about-actions">
+        <a class="btn cs-btn cs-general" href="https://wa.me/6287855771529?text=Halo%20Kak%20Adit%2C%20saya%20butuh%20bantuan%20di%20DITZ%20MARKET." target="_blank" rel="noopener">💬 Chat Adit di WhatsApp</a>
+        <a class="ghost-link" id="adminLink" href="admin.html" style="display:none">Buka Panel Admin →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="help" style="display:none">
+    <div class="section-title"><h2>Pusat Bantuan</h2></div>
+    <div class="card cs-card">
+      <div class="cs-card-head"><div class="cs-avatar">A</div><div><h3>Customer Service — Adit</h3><small>WhatsApp · 0878-5577-1529</small></div></div>
+      <p>Ada kendala saat top up, pembayaran sudah dilakukan tapi belum diproses, atau salah isi ID? Chat CS kami lewat WhatsApp. Sertakan ID pesanan agar lebih cepat dibantu.</p>
+      <a class="btn cs-btn cs-general" href="https://wa.me/6287855771529?text=Halo%20Kak%20Adit%2C%20saya%20butuh%20bantuan%20di%20DITZ%20MARKET." target="_blank" rel="noopener">💬 Chat CS di WhatsApp</a>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h3>Bagaimana cara top up?</h3>
+      <p>Pilih game → isi ID player → pilih paket → pilih metode pembayaran → bayar. Setelah membayar, tekan “Saya Sudah Membayar”; admin akan memeriksa dan menyetujui pembayaranmu.</p><hr>
+      <h3>Berapa lama batas waktu pembayaran?</h3>
+      <p>Kamu punya 15 menit sejak pesanan dibuat. Lewat dari itu pesanan otomatis kedaluwarsa dan kamu perlu membuat pesanan baru.</p><hr>
+      <h3>Apa arti status pesanan?</h3>
+      <p><b>Menunggu Pembayaran</b> — belum dibayar. <b>Menunggu Verifikasi</b> — pembayaran sudah kamu konfirmasi dan sedang dicek admin. <b>Berhasil</b> — top up selesai. <b>Kedaluwarsa / Dibatalkan</b> — pesanan tidak diproses.</p><hr>
+      <h3>Pesanan bermasalah atau belum diproses?</h3>
+      <p>Hubungi CS (Adit) lewat tombol <b>Chat CS</b>. Dari halaman Riwayat atau pembayaran, pesan akan otomatis berisi ID pesananmu.</p><hr>
+      <h3>Salah isi ID atau Zone ID, bagaimana?</h3>
+      <p>Segera chat CS beserta ID pesanan <b>sebelum</b> pesanan diproses. Bila top up sudah masuk ke ID yang kamu isi, pesanan tidak bisa dibatalkan. Lihat <a href="#" onclick="showTab('refund');return false">Kebijakan Refund</a>.</p><hr>
+      <h3>Dari mana saya tahu Zone ID Mobile Legends?</h3>
+      <p>Buka profil di dalam game: Zone ID tampil dalam tanda kurung di samping User ID, misalnya 12345678 (<b>1234</b>).</p><hr>
+      <h3>Saya sudah bayar tapi pesanan kedaluwarsa?</h3>
+      <p>Chat CS, sertakan ID pesanan dan bukti pembayaran. Admin akan mengecek dan membantu memprosesnya.</p><hr>
+      <h3>Bagaimana dengan produk voucher (Steam, Google Play, PlayStation)?</h3>
+      <p>Isi nomor WhatsApp yang aktif saat memesan. Admin akan menghubungimu lewat nomor tersebut setelah pembayaran terverifikasi.</p><hr>
+      <h3>Bagaimana memakai kode promo?</h3>
+      <p>Isi kode di kolom <b>Kode Promo</b> pada halaman checkout lalu tekan <b>Pakai</b>. Satu kode hanya bisa dipakai sekali per akun, dan bisa dibatasi kuota atau masa berlakunya.</p><hr>
+      <h3>Lupa password?</h3>
+      <p>Di halaman masuk, tekan <b>Lupa password?</b> lalu minta kode reset ke admin lewat WhatsApp. Kode berlaku 30 menit.</p><hr>
+      <h3>Kenapa ada kode unik pada total?</h3>
+      <p>Kode unik (Rp10–Rp99) membantu admin mencocokkan pembayaranmu dengan pesanan. Bayar sesuai total yang tertera, tepat sampai digit terakhir.</p>
+    </div>
+  </section>
+
+  <section id="terms" style="display:none">
+    <div class="section-title"><h2>Syarat &amp; Ketentuan</h2></div>
+    <div class="card legal-card">
+      <small class="legal-meta">Berlaku untuk semua pesanan di DITZ MARKET.</small>
+      <h3>1. Umum</h3>
+      <p>Dengan membuat pesanan, kamu menyatakan telah membaca dan menyetujui ketentuan ini. Untuk memesan, kamu perlu membuat akun dan bertanggung jawab menjaga kerahasiaan password.</p>
+      <h3>2. Ketepatan data akun</h3>
+      <p>Kamu bertanggung jawab atas kebenaran ID Player, Zone ID, Riot ID, username, email, atau nomor WhatsApp yang diisi. Top up yang sudah berhasil masuk ke ID yang kamu tulis tidak dapat dibatalkan.</p>
+      <h3>3. Harga dan pembayaran</h3>
+      <ul>
+        <li>Total pembayaran = harga paket + biaya layanan + kode unik.</li>
+        <li>Pembayaran lewat QRIS, DANA, atau GoPay harus sesuai total, tepat sampai digit terakhir.</li>
+        <li>Batas waktu pembayaran 15 menit sejak pesanan dibuat. Setelah itu pesanan kedaluwarsa dan kamu perlu membuat pesanan baru.</li>
+        <li>Harga yang berlaku adalah harga saat pesanan dibuat. Harga dan ketersediaan produk dapat berubah sewaktu-waktu.</li>
+      </ul>
+      <h3>4. Verifikasi dan proses pesanan</h3>
+      <p>Setelah kamu menekan “Saya Sudah Membayar”, admin memeriksa pembayaran secara manual, lalu memproses pesanan. Lama proses dapat berbeda-beda. Tekan tombol konfirmasi hanya setelah benar-benar membayar; konfirmasi palsu dapat membuat pesanan ditolak dan akun dibatasi.  Semua pembayaran hanya disetujui oleh admin; tidak ada persetujuan otomatis.</p>
+      <h3>5. Produk voucher</h3>
+      <p>Untuk Steam Wallet, Google Play, dan PlayStation, nomor WhatsApp wajib diisi dan harus aktif agar admin dapat menghubungimu.</p>
+      <h3>6. Larangan</h3>
+      <p>Dilarang menggunakan layanan untuk penipuan, pembayaran dari sumber yang tidak sah, atau tindakan yang merugikan pihak lain. Kami berhak menolak pesanan atau menutup akun yang melanggar.</p>
+      <h3>7. Status layanan</h3>
+      <p>DITZ MARKET adalah toko top up independen dan tidak berafiliasi dengan penerbit game mana pun. Nama dan logo game adalah milik masing-masing pemiliknya.</p>
+      <h3>8. Perubahan ketentuan</h3>
+      <p>Ketentuan ini dapat diperbarui sewaktu-waktu. Ketentuan yang berlaku adalah versi yang tampil di halaman ini saat kamu memesan.</p>
+    </div>
+  </section>
+
+  <section id="privacy" style="display:none">
+    <div class="section-title"><h2>Kebijakan Privasi</h2></div>
+    <div class="card legal-card">
+      <small class="legal-meta">Data apa yang kami simpan dan untuk apa.</small>
+      <h3>Data yang kami kumpulkan</h3>
+      <ul>
+        <li>Username dan password akun. Password disimpan dalam bentuk hash, bukan teks asli.</li>
+        <li>ID game, nomor WhatsApp (bila diisi), dan riwayat pesanan.</li>
+        <li>Alamat IP, dipakai sementara untuk membatasi percobaan login atau pendaftaran yang berlebihan.</li>
+      </ul>
+      <h3>Tujuan penggunaan</h3>
+      <p>Data dipakai untuk memproses dan memverifikasi pesanan, menghubungimu terkait pesanan, serta membantu penyelesaian kendala lewat CS. Admin dapat melihat data pesanan yang kamu buat.</p>
+      <h3>Berbagi data</h3>
+      <p>Kami tidak menjual datamu. Data tidak dibagikan ke pihak lain kecuali diperlukan untuk memproses pesanan atau diwajibkan oleh hukum.</p>
+      <h3>Cookie</h3>
+      <p>Kami memakai satu cookie sesi untuk menjaga kamu tetap masuk. Cookie ini tidak dipakai untuk iklan.</p>
+      <h3>Permintaan hapus data</h3>
+      <p>Ingin akun atau data pesananmu dihapus? Hubungi CS lewat WhatsApp dan sebutkan username akunmu.</p>
+    </div>
+  </section>
+
+  <section id="refund" style="display:none">
+    <div class="section-title"><h2>Kebijakan Refund</h2></div>
+    <div class="card legal-card">
+      <small class="legal-meta">Kapan pesanan bisa dibatalkan atau dananya dikembalikan.</small>
+      <h3>Pesanan berhasil</h3>
+      <p>Pesanan berstatus <b>Berhasil</b> tidak dapat dibatalkan atau di-refund, kecuali terjadi kesalahan dari pihak DITZ MARKET.</p>
+      <h3>Salah isi ID atau Zone ID</h3>
+      <p>Jika top up sudah masuk ke ID yang kamu isi, kami tidak dapat menarik kembali dan tidak ada refund. Jika pesanan belum diproses, segera hubungi CS agar bisa diperbaiki atau dibatalkan.</p>
+      <h3>Sudah bayar tapi pesanan tidak diproses</h3>
+      <p>Hubungi CS dengan ID pesanan dan bukti pembayaran. Setelah pembayaran terverifikasi, pesanan akan diproses ulang atau dananya dikembalikan.</p>
+      <h3>Pesanan kedaluwarsa tapi sudah transfer</h3>
+      <p>Kirim bukti pembayaran ke CS. Admin akan mengecek dan membantu memprosesnya.</p>
+      <h3>Nominal transfer tidak sesuai</h3>
+      <p>Jika nominal yang dibayar berbeda dari total pesanan, hubungi CS agar bisa dicocokkan. Selisih bisa menunda proses.</p>
+      <h3>Belum dibayar</h3>
+      <p>Pesanan berstatus Menunggu Pembayaran bisa kamu batalkan sendiri kapan saja lewat tombol Batalkan Pesanan.</p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="brand" style="margin:0;font-size:18px">DITZ<span>MARKET</span></div>
+    <div class="footer-links">
+      <a href="#" onclick="showTab('terms');return false">Syarat &amp; Ketentuan</a>
+      <a href="#" onclick="showTab('privacy');return false">Kebijakan Privasi</a>
+      <a href="#" onclick="showTab('refund');return false">Kebijakan Refund</a>
+      <a href="#" onclick="showTab('help');return false">Bantuan</a>
+      <a href="https://wa.me/6287855771529?text=Halo%20Kak%20Adit%2C%20saya%20butuh%20bantuan%20di%20DITZ%20MARKET." target="_blank" rel="noopener">WhatsApp CS</a>
+    </div>
+    <small>Pembayaran via QRIS, DANA, dan GoPay. DITZ MARKET adalah toko top up independen dan tidak berafiliasi dengan penerbit game mana pun.<br>© 2026 DITZ MARKET. Semua hak dilindungi.</small>
+  </footer>
+</main>
+</div>
+
+
+<div class="connection-overlay" id="connectionOverlay" aria-hidden="true">
+  <div class="connection-panel" id="connectionPanel">
+    <div class="connection-logo"><span>◆</span></div>
+    <div class="connection-progress"><div id="connectionProgress"></div></div>
+    <div class="connection-loading-text" id="connectionLoadingText">Memuat...</div>
+    <div class="connection-error" id="connectionError">
+      <div class="error-title">Aduh!</div>
+      <div class="error-text">Koneksi kamu tidak ada</div>
+      <div class="error-sub">Periksa koneksi internet kamu lalu coba lagi.</div>
+      <button type="button" class="connection-back" onclick="closeConnectionOverlay()">Kembali</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal">
+ <div class="checkout-modal">
+  <button class="close" onclick="closeModal()" aria-label="Tutup">×</button>
+  <div class="checkout-head">
+   <span class="secure-pill">● CHECKOUT AMAN</span>
+   <h2 id="modalTitle">Top Up</h2>
+   <p id="modalSub">Lengkapi pesanan dan pilih metode pembayaran.</p>
+  </div>
+
+  <!-- LANGKAH 1: FORM PESANAN -->
+  <div id="stepForm" class="checkout-grid">
+   <div class="checkout-left">
+    <div class="checkout-card">
+     <div class="checkout-label">1. DETAIL AKUN</div>
+     <label for="player" id="playerLabel">ID Player / Username</label>
+     <input id="player" class="checkout-input" placeholder="Masukkan ID player" autocomplete="off">
+     <div id="zoneRow" style="display:none"><label for="zone" style="margin-top:12px">Zone ID</label><input id="zone" class="checkout-input" inputmode="numeric" maxlength="6" placeholder="Contoh: 1234" autocomplete="off"></div>
+     <label for="wa" style="margin-top:12px">No. WhatsApp <span class="opt" id="waOpt">(opsional)</span></label>
+     <input id="wa" class="checkout-input" inputmode="tel" placeholder="08xxxxxxxxxx" autocomplete="off">
+    </div>
+    <div class="checkout-card">
+     <div class="checkout-label">2. PILIH PAKET TOP UP</div>
+     <div class="nominals" id="nominals"></div>
+    </div>
+    <div class="checkout-card">
+     <div class="checkout-label">KODE PROMO <span class="opt">(opsional)</span></div>
+     <div class="promo-row"><input id="promoCode" class="checkout-input" placeholder="Masukkan kode" maxlength="20" autocomplete="off"><button type="button" onclick="applyPromo()">Pakai</button></div>
+     <div class="promo-msg" id="promoMsg"></div>
+    </div>
+    <div class="checkout-card">
+     <div class="checkout-label">3. METODE PEMBAYARAN</div>
+     <div class="methods" id="methods"></div>
+    </div>
+   </div>
+   <div class="checkout-right">
+    <div class="order-card">
+     <div class="order-title">Ringkasan Pesanan</div>
+     <div class="order-product"><div class="order-icon"><img id="sumThumb" alt=""></div><div><b id="sumProduct">Produk</b><small id="sumItem">Paket</small><small id="sumPlayer">ID belum diisi</small></div></div>
+     <div class="order-line"><span>Harga paket</span><b id="subtotal">Rp0</b></div>
+     <div class="order-line" id="discRow" style="display:none"><span>Diskon</span><b id="disc" class="ok">-Rp0</b></div>
+     <div class="order-line"><span>Biaya layanan</span><b id="fee">Rp0</b></div>
+     <div class="order-line" id="uniqRow"><span>Kode unik</span><b id="uniq">Rp0</b></div>
+     <div class="order-total"><span>Total pembayaran</span><strong id="total">Rp0</strong></div>
+    </div>
+    <div id="payOffNote" class="notice-error" style="display:none;margin-bottom:10px">Pembayaran sedang dinonaktifkan oleh admin. Silakan coba lagi nanti.</div>
+    <label class="agree"><input type="checkbox" id="agree"><span>Saya sudah memastikan ID benar dan menyetujui <a href="#" onclick="openLegal('terms');return false">Syarat &amp; Ketentuan</a> serta <a href="#" onclick="openLegal('refund');return false">Kebijakan Refund</a>.</span></label>
+    <button class="pay-btn" id="btnOrder" onclick="createOrder()">Lanjut ke Pembayaran →</button>
+    <div class="payment-note" id="payNote">Waktu bayar 15 menit sejak pesanan dibuat. Kode unik Rp10–Rp99 ditambahkan ke total saat pesanan dibuat.</div>
+    <a class="cs-link cs-general" href="https://wa.me/6287855771529?text=Halo%20Kak%20Adit%2C%20saya%20butuh%20bantuan%20di%20DITZ%20MARKET." target="_blank" rel="noopener">💬 Ada kendala? Chat CS (Adit)</a>
+   </div>
+  </div>
+
+  <!-- LANGKAH 2: PEMBAYARAN -->
+  <div id="stepPay" class="checkout-grid" style="display:none">
+   <div class="checkout-left">
+    <div class="checkout-card">
+     <div id="payNotice" class="pay-state" style="display:none"></div>
+     <div class="pay-timer-wrap" id="payTimerWrap"><span>Selesaikan pembayaran dalam</span><b id="timer">15:00</b></div>
+     <div class="pay-total"><div><small>Total yang harus dibayar</small><strong id="payTotalBig">Rp0</strong></div><button type="button" class="copy-btn" onclick="copyTotal()">SALIN</button></div>
+    </div>
+    <div class="checkout-card" id="proofBox" style="display:none">
+     <div class="checkout-label">BUKTI PEMBAYARAN <span class="opt">(opsional)</span></div>
+     <p class="proof-note">Unggah screenshot bukti bayar agar admin lebih cepat memverifikasi.</p>
+     <input type="file" id="proofFile" accept="image/*" onchange="uploadProof(this)" style="width:100%;font-size:12px;color:var(--text2)">
+     <div class="promo-msg ok" id="proofState"></div>
+    </div>
+    <div id="payInstruct">
+     <div class="checkout-card">
+      <div class="checkout-label" id="payMethodLabel">METODE</div>
+      <div class="qr-payment" id="qrPayment">
+       <div class="qr-head"><span>QRIS</span><span class="qr-valid">Berlaku untuk semua aplikasi QRIS</span></div>
+       <div class="qr-wrap"><img src="assets/qris-ditz.png" alt="QRIS DITZ MARKET"></div>
+       <b>Scan QRIS untuk membayar</b>
+       <div class="nmid">DITZ MARKET · NMID ID1025427537390</div>
+      </div>
+      <div class="qr-payment" id="qrAuto" style="display:none">
+       <div class="qr-head"><span>QR Pembayaran</span><span class="qr-valid">Terverifikasi otomatis</span></div>
+       <div class="qr-wrap"><img id="qrAutoImg" alt="QR pembayaran"></div>
+       <b>Scan untuk membayar</b>
+       <div class="nmid">Status berubah sendiri setelah pembayaran diterima</div>
+      </div>
+      <div id="payAccountBox"></div>
+     </div>
+     <div class="checkout-card">
+      <div class="checkout-label">CARA PEMBAYARAN</div>
+      <ol class="pay-steps" id="paySteps"></ol>
+     </div>
+    </div>
+   </div>
+   <div class="checkout-right">
+    <div class="order-card">
+     <div class="order-title">Detail Pesanan</div>
+     <div class="order-product"><div class="order-icon"><img id="payThumb" alt=""></div><div><b id="payProduct">Produk</b><small id="payItem">Paket</small><small id="payPlayer">ID</small></div></div>
+     <div class="order-line"><span>ID pesanan</span><b id="payOrderId">-</b></div>
+     <div class="order-line"><span>Metode</span><b id="payMethodName">-</b></div>
+     <div class="order-line"><span>Harga paket</span><b id="payPrice">Rp0</b></div>
+     <div class="order-line" id="payDiscRow" style="display:none"><span>Diskon <small id="payPromo"></small></span><b id="payDisc" class="ok">-Rp0</b></div>
+     <div class="order-line"><span>Biaya layanan</span><b id="payFee">Rp0</b></div>
+     <div class="order-line" id="payUniqRow"><span>Kode unik</span><b id="payUniq">Rp0</b></div>
+     <div class="order-total"><span>Total</span><strong id="payTotal">Rp0</strong></div>
+    </div>
+    <div id="payActions">
+     <button class="pay-btn" id="btnPaid" onclick="confirmPaid()"><span>✓</span> Saya Sudah Membayar</button>
+     <button class="ghost-btn" onclick="cancelOrder()">Batalkan Pesanan</button>
+     <div class="payment-note" id="paidNote">Tekan tombol di atas hanya setelah kamu menyelesaikan pembayaran. Admin akan memverifikasi pembayaranmu.</div>
+    </div>
+    <div id="payDoneActions" style="display:none">
+     <button class="pay-btn" onclick="goHistory()">Lihat Riwayat</button>
+     <button class="ghost-btn" onclick="closeModal()">Tutup</button>
+    </div>
+    <a class="cs-link" id="payCs" href="https://wa.me/6287855771529?text=Halo%20Kak%20Adit%2C%20saya%20butuh%20bantuan%20di%20DITZ%20MARKET." target="_blank" rel="noopener">💬 Ada kendala dengan pesanan ini? Chat CS (Adit)</a>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="auth-gate" id="authGate">
+ <form class="auth-card" id="authForm" autocomplete="off">
+  <div class="auth-logo">DITZ<span>MARKET</span></div>
+  <div class="auth-tabs"><button type="button" id="tabLogin" class="on" onclick="setAuthMode('login')">Masuk</button><button type="button" id="tabReg" onclick="setAuthMode('register')">Daftar</button></div>
+  <p class="auth-sub" id="authSub">Masuk untuk mulai top up dan melihat riwayat pesananmu.</p>
+  <label for="aUser">Username</label><input id="aUser" autocomplete="username" maxlength="20" required>
+  <label for="aPass" id="lPass">Password</label><input id="aPass" type="password" autocomplete="current-password" required>
+  <div id="codeRow" style="display:none"><label for="aCode">Kode reset dari admin</label><input id="aCode" autocomplete="off" maxlength="12" style="text-transform:uppercase"></div>
+  <div id="regRow" style="display:none"><label for="aPass2">Ulangi password</label><input id="aPass2" type="password" autocomplete="new-password"></div>
+  <button class="btn auth-btn" id="authBtn" type="submit">Masuk</button>
+  <a href="#" class="auth-link" id="forgotLink" onclick="setAuthMode('reset');return false">Lupa password?</a>
+  <a href="#" class="auth-link" id="backLink" style="display:none" onclick="setAuthMode('login');return false">← Kembali masuk</a>
+  <a class="auth-link" id="resetWa" style="display:none" href="https://wa.me/6287855771529?text=Halo%20Kak%20Adit%2C%20saya%20lupa%20password%20akun%20DITZ%20MARKET.%20Username%20saya%3A%20" target="_blank" rel="noopener">💬 Minta kode reset ke admin (WhatsApp)</a>
+  <div class="auth-msg" id="authMsg" role="alert"></div>
+ </form>
+</div>
+<a class="cs-float" id="csFloat" href="https://wa.me/6287855771529?text=Halo%20Kak%20Adit%2C%20saya%20butuh%20bantuan%20di%20DITZ%20MARKET." target="_blank" rel="noopener" aria-label="Chat CS via WhatsApp"><span class="cs-ico">💬</span><span class="cs-txt">Chat CS</span></a>
+<div class="toast" id="toast"></div>
+
+<script src="js/ml-catalog.js"></script>
+<script src="js/store.js"></script>
+</body>
+</html>
